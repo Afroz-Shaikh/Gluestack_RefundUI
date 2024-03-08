@@ -12,15 +12,28 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GluestackProvider(
+      gluestackCustomConfig: GluestackCustomConfig(button: {
+        'borderRadius': '\$md',
+        'backgroundColor': '\$red500',
+        'variants': {
+          'action': {
+            'primary': {
+              'bg': '\$violet600',
+              '_dark': {
+                'bg': '\$violet500',
+                'borderColor': '\$primary700',
+                ':hover': {
+                  'bg': '\$primary500',
+                  'borderColor': '\$primary400',
+                }
+              }
+            }
+          }
+        }
+      }),
       gluestackTokenConfig: GluestackTokenConfig(
         gsColorsToken: const GSColorsToken(
-          textLight700: Colors.black,
-          // info700: Colors.white,
-          // info600: Colors.white,
-          // info400: Colors.white,
-          // primary0: Colors.purple,
-          // backgroundLight800: Colors.black,
-          // backgroundDark400: Color(0xffE11D48),
+          primary0: Colors.red,
         ),
         gsRadiiToken: const GSRadiiToken(
           $sm: 0,
@@ -35,18 +48,18 @@ class MainApp extends StatelessWidget {
           $xl: 18,
         ),
       ),
-      child: const GSApp(
-        localizationsDelegates: [
+      child: GSApp(
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
+        darkTheme: GSThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: const Color(0xFF171717)),
         debugShowCheckedModeBanner: false,
-        // darkTheme: GSThemeData(
-        //   brightness: Brightness.dark,
-        // ),
         title: 'GlueStack UI',
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }
